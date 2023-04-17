@@ -1,16 +1,14 @@
-<p align='left'>
-    <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
-</p>
 
-# Repaso PI / Alejo y Diego - Breaking Bad
+
+# Repaso PI 
 
 <p align="left">
-  <img height="200" src="./bb.png" />
+  <img height="200" src="https://repository-images.githubusercontent.com/120371205/b6740400-92d4-11ea-8a13-d5f6e0558e9b" />
 </p>
 
 ## Objetivos del Proyecto / llegar clean el PI
 
-- Construir una App utlizando React, Redux, Node y Sequelize.
+- Construir una App utlizando React, Redux.
 - Afirmar y conectar los conceptos aprendidos en la carrera.
 - Aprender mejores prácticas.
 - Aprender y practicar el workflow de GIT.
@@ -18,38 +16,26 @@
 
 ## BoilerPlate - del PI de prueba
 
-El boilerplate cuenta con dos carpetas: `api` y `client`. En estas carpetas estará el código del back-end y el front-end respectivamente.
-
-En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
-
-```
-DB_USER=usuariodepostgres
-DB_PASSWORD=passwordDePostgres
-DB_HOST=localhost
-```
-
-Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales).
-
-Adicionalmente será necesario que creen desde psql una base de datos llamada `breakingbad`
+El boilerplate cuenta con la carpetaa: `client`. En esta carpeta estará el código front-end respectivamente.
 
 El contenido de `client` fue creado usando: Create React App.
 
 ## Enunciado
 
-La idea general es crear una aplicación en la cual se puedan ver distintos personajes de Breaking Bad junto con información relevante de los mismos utilizando la api externa [The Breaking Bad API](https://breakingbadapi.com/) y a partir de ella poder, entre otras cosas:
+La idea general es crear una aplicación en la cual se puedan ver distintos personajes de Breaking Bad junto con información relevante de los mismos utilizando la api externa [Rick and Morty API](https://rickandmortyapi.com/) y a partir de ella poder, entre otras cosas:
 
 - Buscar personajes
 - Filtrarlos / Ordenarlos
 - Agregar nuevos personajes
 
-**IMPORTANTE**: Para poder utilizar esta API externa no es necesario crearse una cuenta.
 
-**IMPORTANTE**: Para las funcionalidades de filtrado y ordenamiento NO pueden utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados sino que deben realizarlo ustedes mismos. En particular alguno de los ordenamientos o filtrados debe si o si realizarse desde el frontend.
+### Los Endpoints que pueden utilizar
 
-### Únicos Endpoints/Flags que pueden utilizar
+- GET https://rickandmortyapi.com/api/character
+- GET https://rickandmortyapi.com/api/character/2
+- GET https://rickandmortyapi.com/api/character/?name=rick
 
-- GET https://breakingbadapi.com/api/characters
-- GET https://www.breakingbadapi.com/api/characters/?name={name}
+Para los filtros puedes visitar la siguiente [documentacion](https://rickandmortyapi.com/documentation/#filter-characters)
 
 ### Requerimientos mínimos:
 
@@ -59,8 +45,7 @@ La idea general es crear una aplicación en la cual se puedan ver distintos pers
 
 - [ ] React
 - [ ] Redux
-- [ ] Express
-- [ ] Sequelize - Postgres
+- [ ] React Router
 
 #### Frontend
 
@@ -77,73 +62,32 @@ Se debe desarrollar una aplicación de React/Redux que contenga las siguientes p
 - [ ] Área donde se verá el listado de personajes. Deberá mostrar su:
   - Imagen
   - Nombre
-  - Nickname
-- [ ] Botones/Opciones para filtrar por status y por personaje existente o agregado por nosotros
+  - Origin
+- [ ] Botones/Opciones para filtrar por status y species
 - [ ] Boton/Opcion para ordenar tanto ascendentemente como descendentemente los personajes por orden alfabético
 - [ ] Paginado para ir buscando y mostrando los siguientes personajes
 
-**IMPORTANTE**: Dentro de la Ruta Principal se deben mostrar tanto los personajes traidos desde la API como así también los de la base de datos.
+**IMPORTANTE**: Dentro de la Ruta Principal se deben mostrar tanto los personajes traidos desde la API
 
 **Ruta de detalle de personaje**: debe contener
 
-- [ ] Los campos mostrados en la ruta principal para cada personaje (imagen, nombre y nickname)
-- [ ] Ocupación
-- [ ] Status
-- [ ] Cumpleaños
-- [ ] Temporadas en las que aparece
+- [ ] Los campos mostrados en la ruta principal para cada personaje (imagen, nombre y origin)
+- [ ] species
+- [ ] Location
+- [ ] Gender
+- [ ] El numero de episodios en el que aparece
 
 \_\_Ruta de creación de personaje: debe contener
 
 - [ ] Un formulario **controlado** con los siguientes campos
   - Nombre
-  - Nickname
-  - Cumpleaños
+  - origin
+  - species
   - Status
-  - Imagen
-- [ ] Posibilidad de seleccionar/agregar una o más ocupaciones
+  - Location
+- [ ] Posibilidad de seleccionar/agregar una o más episodios
 - [ ] Botón/Opción para crear un nuevo personaje
 
-#### Base de datos
-
-El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
-
-- [ ] Personaje con las siguientes propiedades:
-  - ID \*
-  - Nombre \*
-  - Nickname \*
-  - Cumpleaños \*
-  - Status
-  - Imagen
-- [ ] Ocupación con las siguientes propiedades:
-  - ID
-  - Nombre
-
-La relación entre ambas entidades debe ser de muchos a muchos ya que un personaje puede tener varias "ocupaciones" en simultaneo y, a su vez, una "ocupación" puede corresponder a múltiples personajes. Por ejemplo, Kimberly Wexler es 'lawyer', pero a su vez existen otros personajes con esa ocupación.
-
-**IMPORTANTE**: Pensar como modelar los IDs de los personajes en la base de datos. Existen distintas formas correctas de hacerlo pero tener en cuenta que cuando hagamos click en alguno, este puede provenir de la API o de la Base de Datos por lo que cuando muestre su detalle no debería haber ambigüedad en cual se debería mostrar. Por ejemplo si en la API el personaje Walter White `tiene id = 1 y en nuestra base de datos creamos un nuevo personaje`Walter Black` con id = 1, ver la forma de diferenciarlas cuando querramos acceder al detalle de los mismos.
-
-#### Backend
-
-Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
-
-**IMPORTANTE**: No está permitido utilizar los filtrados, ordenamientos y paginados brindados por la API externa, todas estas funcionalidades tienen que implementarlas ustedes.
-
-- [ ] **GET /characters**:
-  - Obtener un listado de los primeros 6 personajes
-  - Debe devolver solo los datos necesarios para la ruta principal
-- [ ] **GET /characters?name="..."**:
-  - Obtener un listado de los primeros 6 personajes que contengan la palabra ingresada como query parameter
-  - Si no existe ningun personaje mostrar un mensaje adecuado
-- [ ] **GET /character/{idPersonaje}**:
-  - Obtener el detalle de un personaje en particular
-  - Debe traer solo los datos pedidos en la ruta de detalle de personaje
-  - Incluir las ocupaciones asociadas
-- [ ] **GET /ocupaciones**:
-  - Obtener todas las ocupaciones posibles
-  - En una primera instancia deberán obtenerlas desde la API externa y guardarlas en su propia base de datos y luego ya utilizarlas desde allí
-- [ ] **POST /character**:
-  - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de personaje por body
-  - Crea un personaje en la base de datos
 
 #### Testing
 
